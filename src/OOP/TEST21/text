@@ -1,0 +1,153 @@
+
+In this assignment you have been assigned to do the ship placement logic of the batelship game.
+
+Ships can be placed vertically and horizontally on the board. There can be many type of ships
+with different lengths and letters. The board can be of any width and length, all board rows
+have the same length.
+
+You have been assigned by your team leader to create this core utility class for the game.
+
+The board will be a 2D String array, the board class can be a 2D array of any size. The only
+rule is that all the rows (inner arrays) have the same size for example:
+
+
+```
+["w","w","s","s","w"]
+["w","w","w","w","m"]
+["w","d","d","d","d"]
+["w","c","w","w","h"]
+["w","c","w","~","h"]
+```
+
+
+Each character represent a different part of the board:
+>
+w - a water tile
+s - a part of the submarine
+m - is a mine
+d - is a part of the destroyer ship
+c - is part of the corvet ship
+~ - is a missd shot/hit
+h - is a confirmed hit on a ship or other vessel.
+
+Lets take this empty board for example:
+
+```
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+```
+
+We want to place a submarine horizontally at the top left part of the board ( the [0][0]
+position in the board array) we will use a method called place ship that gets the information it
+needs for placing the ship:
+
+```
+placeShip(0,0,0,0);
+```
+
+the first argument (0), is the row position on the board array. The second is the column
+position on the board array. The third is the position direction of the ship vertical or
+horizontal ( `0 = vertical   , 1 = horizontal`)  in this case 0 so its a vertical position),
+the last is the ship type position in the ship type array of the  position_manger class.
+
+After placing the ship the board will look like that:
+
+```
+["s","w","w","w","w"]
+["s","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+```
+
+If we wanted the submarine in horizontal position:
+
+```
+placeShip(0,0,1,0);
+```
+
+and the board will look like:
+
+```
+["s","s","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+["w","w","w","w","w"]
+```
+---------------------------------
+
+
+### PositionManager class
+
+**attributes**:
+```
+- boardR (String[][] ) - 2d string array representing a battleship board
+
+- shipTypes (String[]) - a string array representing the ships that can be placed on the board
+```
+  > private String[] shipTypes = new String[]{"ss","m","dddd","ccc"};
+
+
+**constractor**:
+
+- Accepts a  2d string array (String[][]) representing the board and sets `boardR` to that 2d array.
+
+**methods**:
+
+- `placeShip()`: places a ship on the board
+```
+input: 4 int (each number explained above)
+
+output: boolean , true means the operation of the method was successful
+```
+
+- `isValidPos()`: checks if placement of a ship on the board is valid, very useful to check if
+positioning of a vessel is possible before placing it.
+```
+input: 4 int (each number explained above)
+
+output: boolean , true means the operation of the method was successful
+```
+
+---------------------------------
+### Board class
+
+**attributes**:
+```
+- boardR (String[]) - a 2d string array representing the game board
+- destroyed (boolean) - a boolean for checking if all ship parts on the board have been dystroyed.
+```
+**constructor**:
+- Accepts a 2d string array (String[]) representing the board and sets boardR to that 2d array.
+
+**methods**:
+
+- `hit()`: hits a position on the board. Returns true if it hit a ship and changes the position
+to hit(h) on the board.
+Returns false if it hits water and changes the water (w) symbol to a
+miss symbol (~).
+```
+input: row & column (int)
+row - the targeted row position in the 2d string array(arr[row])
+column - the targeted column position in the 2d string array
+
+output: boolean , if hit a ship return true if water or out of array bounds return false
+```
+
+- `isDestroyed()`: checks if all ships on the board have been destroyed.
+```
+input: none
+
+output: boolean, if all ships have been destroyed
+```
+
+- `getBoardR()`: returns the board
+```
+input: none
+
+output: 2d string array
+```
